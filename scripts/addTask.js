@@ -29,16 +29,25 @@ const titleInput = document.getElementById("title");
 const tasks = [];
 const userTasks = JSON.parse(localStorage.getItem('userTasks')) || {};
 const selectModal = document.getElementById('modal__select');
+const taskColor = document.getElementById('add-task__select');
+
+const dateInput = document.getElementById('data');
+const today = new Date().toISOString().split('T')[0];
+dateInput.setAttribute('min', today);
 
 form.addEventListener("submit", function(event) {
   event.preventDefault(); 
   const title = titleInput.value;
   const data = document.getElementById("data").value;
-  const dateInput = document.getElementById('data');
+  // const dateInput = document.getElementById('data');
+  // const today = new Date().toISOString().split('T')[0];
+  // dateInput.setAttribute('min', today);
   const dateValue = new Date(dateInput.value);
   const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
   const formattedDate = dateValue.toLocaleDateString('de-DE', options);
   const projectModal = selectModal.value;
+  const taskColorInput = taskColor.value;
+  
 
   const li = document.createElement("li");
   li.classList.add("task");
@@ -47,7 +56,7 @@ form.addEventListener("submit", function(event) {
         <div class="task__data" id="${projectModal}">
         <svg class="task__accept" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M510.52,118.16,449.81,57.48a5,5,0,0,0-7.13,0L181.15,318.9a5,5,0,0,1-7.13,0L69.32,214.24a5,5,0,0,0-7.13,0L1.48,274.93a5,5,0,0,0,0,7.12L174,454.52a5,5,0,0,0,7.13,0L510.52,125.29A5,5,0,0,0,510.52,118.16Z"/></svg>   
           <ul>
-            <li><h2 class="task__name">${title}</h2></li>
+            <li><h2 class="task__name ${taskColorInput}">${title}</h2></li>
             <li><h4 class="task__time">${new Date().toLocaleDateString()}</h4></li>
            
             <li><p class="task__category">${formattedDate}</p></li>
@@ -112,19 +121,22 @@ window.addEventListener('load', function() {
       tasks.push(taskEl);
       
       taskEl.addEventListener('click', function() {
-        location.reload();
-        const currentValue = parseInt(compl.textContent);
-        // увеличиваем его на 1
-        const newValue = currentValue + 1;
-        // обновляем значение числа внутри элемента
-        compl.textContent = newValue;
-        localStorage.setItem(`compNumber-${loggedInUser}`, JSON.stringify(newValue))
-        const userTasksInLocalStorage = JSON.parse(localStorage.getItem('userTasks')); // получаем массив из localStorage
-        const userTasksForCurrentUser = userTasksInLocalStorage[loggedInUser]; // получаем массив задач для текущего пользователя
-        const taskIndex = userTasksForCurrentUser.indexOf(taskHTML); // находим индекс задачи в массиве
-        if (taskIndex > -1) { // если задача найдена в массиве
-          userTasksForCurrentUser.splice(taskIndex, 1); // удаляем задачу из массива
-          localStorage.setItem('userTasks', JSON.stringify(userTasksInLocalStorage)); // сохраняем массив обратно в localStorage
+        const taskdel = confirm('Подтвердите выполнение задачи');
+        if (taskdel){
+          location.reload();
+          const currentValue = parseInt(compl.textContent);
+          // увеличиваем его на 1
+          const newValue = currentValue + 1;
+          // обновляем значение числа внутри элемента
+          compl.textContent = newValue;
+          localStorage.setItem(`compNumber-${loggedInUser}`, JSON.stringify(newValue))
+          const userTasksInLocalStorage = JSON.parse(localStorage.getItem('userTasks')); // получаем массив из localStorage
+          const userTasksForCurrentUser = userTasksInLocalStorage[loggedInUser]; // получаем массив задач для текущего пользователя
+          const taskIndex = userTasksForCurrentUser.indexOf(taskHTML); // находим индекс задачи в массиве
+          if (taskIndex > -1) { // если задача найдена в массиве
+            userTasksForCurrentUser.splice(taskIndex, 1); // удаляем задачу из массива
+            localStorage.setItem('userTasks', JSON.stringify(userTasksInLocalStorage)); // сохраняем массив обратно в localStorage
+          }
         }
       });
     });

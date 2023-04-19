@@ -42,10 +42,20 @@
                           <form id="add-task-form">
                             <label class="add-task__title" for="title">Title:</label>
                             <input class="add-task__area" type="text" id="title" name="title" required>
-                            <label class="add-task__title" for="title">Select favorites:</label>
+                            <label class="add-task__title" for="title">Select favorites and Importance:</label>
                             <select id="modal__select" class="project__name">
                                 <!-- <option id="all-task__select">All-tasks</option> -->
                             </select>
+                            <!-- <select class="add-task__color">
+                                <option value="" style="background-color: red;">Hight Importance</option>
+                                <option value="" style="background-color: yellow;">Middle Importance</option>
+                                <option value="" style="background-color: green;">Minimum Importance</option>
+                            </select> -->
+                            <select id="add-task__select">
+                                <option value="h-imp">Hight Importance</option>
+                                <option value="mid-imp">Middle Importance</option>
+                                <option value="min-imp">Minimum Importance</option>
+                              </select>
                             <label class="add-task__category" for="category">Date of end:</label>
                             <input class="add-task__data" type="date" id="data" name="data" required>
                             <button class="add-btn" type="submit">Add Task</button>
@@ -153,7 +163,19 @@
                         
                     <ul class="task__manager hide" id="All-task">
 
-        
+                        <!-- <div class="task" id="Test2">
+                            <div class="container" "="">
+                             <div class="task__data" id="Test2">
+                             <svg class="task__accept" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M510.52,118.16,449.81,57.48a5,5,0,0,0-7.13,0L181.15,318.9a5,5,0,0,1-7.13,0L69.32,214.24a5,5,0,0,0-7.13,0L1.48,274.93a5,5,0,0,0,0,7.12L174,454.52a5,5,0,0,0,7.13,0L510.52,125.29A5,5,0,0,0,510.52,118.16Z"></path></svg>   
+                               <ul>
+                                 <li><h2 class="task__name">T3</h2></li>
+                                 <li><h4 class="task__time">21.03.2023</h4></li>
+                                 <li></li>
+                                 <li><p class="task__category">4.3.2023</p></li>
+                               </ul>
+                             </div>
+                           </div>
+                         </div> -->
                     
                     </ul>
 

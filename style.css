@@ -728,6 +728,20 @@ body{
     transition: all 0.2s ease-in-out;
 }
 
+.add-task__color{
+    order: solid 0.5px;
+    appearance: auto;
+    outline: none;
+    background-color: #6F757B;
+    color: #DEE4E5;
+    border-radius: 10px;
+    color: black;
+}
+
+.add-task__color option{
+    font-weight: bold;
+}
+
 .project__name:hover{
     transition: all 0.2s ease-in-out;
     background-color: #2C2E43;
@@ -801,9 +815,21 @@ body{
 }
 
 .task__name{
-    color: #DEE4E5;
+    /* color: #DEE4E5; */
     font-size: calc(var(--index) / 1.2);
     margin-bottom: 1.5%;
+}
+
+.h-imp{
+    color: #E94560;
+}
+
+.mid-imp{
+    color: rgb(228, 119, 1);
+}
+
+.min-imp{
+    color: #5CB8E4;
 }
 
 .task__time{

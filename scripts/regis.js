@@ -73,23 +73,64 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // добавляем обработчики событий для форм
+// registerForm.addEventListener("submit", (event) => {
+//   event.preventDefault();
+//   const username = event.target.username.value;
+//   const password = event.target.password.value;
+
+//      // проверяем, есть ли уже такой пользователь
+//   if (localStorage.getItem(username) !== null) {
+//     alert("Имя пользователя уже занято!");
+//     return;
+//   }
+
+//   localStorage.setItem(username, password);
+//   alert("Вы успешно зарегистрировались!");
+//   event.target.reset();
+//   registerForm.style.display = "none";
+//   loginForm.style.display = "block";
+// });
+
+function login(username, password) {
+  const storedPassword = localStorage.getItem(username);
+  
+  if (password === storedPassword) {
+  // alert("Вы успешно вошли!");
+  localStorage.setItem("loggedInUser", username);
+  usernameHeader.textContent = username;
+  loginForm.style.display = "none";
+  loginBtn.style.display = "none";
+  registerBtn.style.display = "none";
+  registerForm.style.display = "none";
+  logoutBtn.style.display = "block";
+  doneResult.style.display = 'block';
+  localStorage.setItem("isLoggedIn", "true");
+  location.reload();
+  }
+   else {
+  alert("Неверное имя пользователя или пароль!");
+  }
+}
+
 registerForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const username = event.target.username.value;
   const password = event.target.password.value;
-
-     // проверяем, есть ли уже такой пользователь
+  
+  // проверяем, есть ли уже такой пользователь
   if (localStorage.getItem(username) !== null) {
-    alert("Имя пользователя уже занято!");
-    return;
+  alert("Имя пользователя уже занято!");
+  return;
   }
-
+  
   localStorage.setItem(username, password);
-  alert("Вы успешно зарегистрировались!");
+  // сразу логиним пользователя после регистрации
+  login(username, password);
   event.target.reset();
   registerForm.style.display = "none";
   loginForm.style.display = "block";
-});
+  });
+
 
 loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
